@@ -44,11 +44,12 @@ export async function createFarmerProfile(
   input: CreateFarmerProfileInput
 ): Promise<FarmerProfileResult> {
   try {
+    const data: Prisma.FarmerProfileUncheckedCreateInput = {
+      userId,
+      ...input,
+    };
     return await prisma.farmerProfile.create({
-      data: {
-        userId,
-        ...input,
-      },
+      data,
       select: FARMER_PROFILE_SELECT,
     });
   } catch (err) {
