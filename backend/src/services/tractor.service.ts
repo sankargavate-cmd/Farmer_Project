@@ -59,11 +59,12 @@ export async function createTractorProfile(
   input: CreateTractorProfileInput
 ): Promise<TractorProfileResult> {
   try {
+    const data: Prisma.TractorProfileUncheckedCreateInput = {
+      userId,
+      ...input,
+    };
     return await prisma.tractorProfile.create({
-      data: {
-        userId,
-        ...input,
-      },
+      data,
       select: TRACTOR_PROFILE_SELECT,
     });
   } catch (err) {
