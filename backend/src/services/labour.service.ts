@@ -58,11 +58,12 @@ export async function createLabourProfile(
   input: CreateLabourProfileInput
 ): Promise<LabourProfileResult> {
   try {
+    const data: Prisma.LabourProfileUncheckedCreateInput = {
+      userId,
+      ...input,
+    };
     return await prisma.labourProfile.create({
-      data: {
-        userId,
-        ...input,
-      },
+      data,
       select: LABOUR_PROFILE_SELECT,
     });
   } catch (err) {
