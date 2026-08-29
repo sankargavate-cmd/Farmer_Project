@@ -437,8 +437,10 @@ async function recomputeAverageRating(
     return;
   }
 
+  const where: Prisma.RatingWhereInput = { rateeId, targetType };
+
   const { _avg, _count } = await prisma.rating.aggregate({
-    where: { rateeId, targetType },
+    where,
     _avg: { rating: true },
     _count: { rating: true },
   });
