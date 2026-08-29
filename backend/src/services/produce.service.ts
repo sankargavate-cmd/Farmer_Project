@@ -94,11 +94,12 @@ export async function createProduceListing(
   farmerId: string,
   input: CreateProduceListingInput
 ): Promise<ProduceListingResult> {
+  const data: Prisma.ProduceListingUncheckedCreateInput = {
+    farmerId,
+    ...input,
+  };
   return prisma.produceListing.create({
-    data: {
-      farmerId,
-      ...input,
-    },
+    data,
     select: PRODUCE_LISTING_SELECT,
   });
 }
