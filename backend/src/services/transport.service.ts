@@ -61,11 +61,12 @@ export async function createTransportProfile(
   input: CreateTransportProfileInput
 ): Promise<TransportProfileResult> {
   try {
+    const data: Prisma.TransportProfileUncheckedCreateInput = {
+      userId,
+      ...input,
+    };
     return await prisma.transportProfile.create({
-      data: {
-        userId,
-        ...input,
-      },
+      data,
       select: TRANSPORT_PROFILE_SELECT,
     });
   } catch (err) {
